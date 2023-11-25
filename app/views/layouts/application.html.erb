@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/f3101bdfd7.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+
+          <%= link_to "Bookers", root_path, class: "navbar-brand" %>
+          <div>
+          <% if user_signed_in? %>
+
+          <ul class="list-inline">
+            <li class="list-inline-item">
+              <%= link_to user_path(current_user.id), class: "nav-link text-light d-flex align-items-center" do %>
+                <i class="fa-solid fa-home"></i>
+                <span>Home</span>
+              <% end %>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to users_path, class: "nav-link text-light d-flex align-items-center" do %>
+                <i class="fa-solid fa-users"></i>
+                <span>Users</span>
+              <% end %>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to books_path, class: "nav-link text-light d-flex align-items-center" do %>
+                <i class="fa-solid fa-book-open"></i>
+                <span>Books</span>
+              <% end %>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light d-flex align-items-center" do %>
+                <i class="fa-solid fa-sign-out-alt"></i>
+                <span>Log out</span>
+              <% end %>
+            </li>
+          </ul>
+          <% else %>
+            <ul>
+            <li class="list-inline-item">
+              <%= link_to root_path, class: "nav-link text-light d-flex align-items-center" do %>
+                <i class="fa-solid fa-home"></i>
+                <span>Home</span>
+              <% end %>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to about_path, class: "nav-link text-light d-flex align-items-center" do %>
+                <i class="fa-solid fa-link"></i> 
+                <span>About</span>
+              <% end %>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to new_user_registration_path, class: "nav-link text-light d-flex align-items-center" do %>
+                <i class="fa-solid fa-user-plus"></i> 
+                <span>Sign up</span>
+              <% end %>
+            </li>
+            <li class="list-inline-item">
+              <%= link_to new_user_session_path, class: "nav-link text-light d-flex align-items-center" do %>
+               <i class="fa-solid fa-sign-in-alt"></i>
+                <span>Log in</span>
+              <% end %>
+            </li>
+            </ul>
+          <% end %>
+          </div>
+        </div>
+      </nav>
+  </header>
+   <div>
+  <%= flash[:notice] %>
+   </div>
+    <main class="mb-auto">
+    <%= yield %>
+    </main>
+
+   <div class=" text-center">
+    <div class="footer">
+      <p>CopyRight Infratop.inc</p>
+    </div>
+    </div>
+  </body>
+</html>
