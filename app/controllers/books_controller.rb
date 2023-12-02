@@ -9,7 +9,8 @@ class BooksController < ApplicationController
     @book = Book.new
     @book_detail = Book.find(params[:id])
     @books = Book.all
-    
+    @user = User.find(current_user.id)
+    @comment = Comment.new
   end
 
   def edit
@@ -17,7 +18,7 @@ class BooksController < ApplicationController
     @user = @book.user
     if @user.id != current_user.id
       redirect_to books_path
-    end 
+    end
   end
 
   def update
