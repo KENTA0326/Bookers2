@@ -1,0 +1,8 @@
+
+$(".counter").html("<%= j(render 'comments/counter', { book: @book}) %>")
+
+<%# 部分テンプレートファイルを指定する %>
+$('.comment_area').html("<%= j(render 'comments/index',  book: @book) %>")
+
+$(".text_area").val('')
+

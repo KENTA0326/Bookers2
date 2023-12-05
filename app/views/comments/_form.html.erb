@@ -1,0 +1,9 @@
+<%= form_with model: [book,comment] , url: book_comments_path(book),local: false do |f| %>
+          <div class="form-group">
+            <%= f.label :content %>
+            <%= f.text_area :content, class: 'form-control' %>
+          </div>
+
+
+            <%= f.submit 'コメント送信', class: 'btn btn-black btn-block' %>
+        <% end %>

@@ -17,48 +17,23 @@
       </td>
       <td><%= link_to @book_detail .title, book_path(@book_detail) %></td>
       <td><%= @book_detail.body %></td>
-      <% if @book_detail.favorited_by?(current_user) %>
-        <td>
-          <%= link_to book_favorites_path(@book_detail), method: :delete do %>
-            ♥<%= @book_detail.favorites.count %>
-          <% end %>
-        </td>
-        <% else %>
-        <td>
-          <%= link_to book_favorites_path(@book_detail), method: :post do %>
-            ♡<%= @book_detail.favorites.count %>
-          <% end %>
-        </td>
-      <% end %>
+      <td id = <%="favorite_buttons_#{@book_detail.id}"%>><%= render "favorites/btn", book: @book_detail %></td>
       <% if @book_detail.user == current_user %>
         <td>
-          <%= link_to "Edit", edit_book_path(@book_detail) %>
+          <%= link_to "Edit", edit_book_path(@book_detail), class: "btn btn-sm btn-success edit_book_#{@book.id}" %>
         </td>
         <td>
-          <%= link_to "Destroy", book_path(@book_detail), method: :delete, "data-confirm" => "本当に消しますか？" %>
+          <%= link_to "Destroy", book_path(@book_detail), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-sm btn-danger destroy_book_#{@book.id}" %>
         </td>
       <% end %>
-      <td>コメント数：<%= @book_detail.comments.count %></td>
+      <td class="counter"> <%= render "comments/counter", book: @book_detail %></td>
     </tr>
   </table>
   <h1 class="text-center"></h1>
-  <% @book_detail.comments.each do |comment| %>
-    <p><%= image_tag comment.user.get_profile_image(100,100) %></p>
-    <%= comment.user.name %>
-    <%=comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-     <% if comment.user == current_user %>
-      <%= link_to "削除", book_comment_path(comment.book, comment), method: :delete %>
-    <% end %>
-  <% end %>
-        <%= form_with model: [@book_detail,@comment] , url: book_comments_path(@book_detail),local: true do |f| %>
-          <div class="form-group">
-            <%= f.label :content %>
-            <%= f.text_area :content, class: 'form-control' %>
-          </div>
-
-
-            <%= f.submit 'コメント送信', class: 'btn btn-black btn-block' %>
-        <% end %>
+  <div class="comment_area">
+      <%= render "comments/index", book: @book_detail %>
+  </div>
+      <%= render "comments/form", book: @book_detail, comment: @comment %>
   </div>
  </div>
 </div>
