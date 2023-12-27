@@ -1,6 +1,7 @@
         <h3>User info</h3>
         <table class="table">
           <tbody>
+            
             <tr>
               <p><%= image_tag user.get_profile_image(100,100) %></p>
             <tr>
@@ -15,6 +16,7 @@
                 <h6><%= user.followers.count %></h6>
               <% end %>
             </td>
+           
             </tr>
             <tr>
               <th>Followers</th>
