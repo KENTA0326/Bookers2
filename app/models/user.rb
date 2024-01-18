@@ -8,6 +8,8 @@ class User < ApplicationRecord
  has_many :favorites, dependent: :destroy
   has_many :books, dependent: :destroy
   has_many :comment, dependent: :destroy
+  has_many :notifications, dependent: :destroy  
+  has_one_attached :profile_image
 
   # DM機能のテーブル設計
   has_many :messages, dependent: :destroy

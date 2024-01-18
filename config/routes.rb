@@ -15,6 +15,8 @@ Rails.application.routes.draw do
    resources :comments
   end
 
+
+
   resources :messages, only: [:create]
   resources :rooms, only: [:create, :show]
   resources :users, only: [:edit, :show, :update, :index] do
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
       get :follows, :followers
     end
       resource :relationships, only: [:create, :destroy]
+    get 'notification', on: :collection
 
 
    end
